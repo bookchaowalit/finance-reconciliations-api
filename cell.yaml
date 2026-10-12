@@ -1,0 +1,53 @@
+# Reconciliations cell: one of the ten finance services split from the retired finance_* tables (2026-10-12).
+# Checks of an account (account_id) against a statement or export for a period.
+# Amounts are real (float) like every kit cell; cross-cell ids (account_id, ...) are plain bigints, not foreign keys.
+cell: reconciliations
+title: Reconciliations
+resources:
+  reconciliation:
+    filters:
+    - account_id
+    - status
+    - source_type
+    fields:
+      account_id:
+        type: bigint
+      period_start:
+        type: date
+        required: true
+      period_end:
+        type: date
+        required: true
+      source_type:
+        type: enum
+        values:
+        - bank_statement
+        - wallet_export
+        - invoice_register
+        - manual
+        - other
+        required: true
+      source_ref:
+        type: text
+      expected_amount:
+        type: real
+      reconciled_amount:
+        type: real
+      difference_amount:
+        type: real
+      currency:
+        type: text
+        default: THB
+        max_length: 12
+      status:
+        type: enum
+        values:
+        - open
+        - matched
+        - exception
+        - closed
+        default: open
+      reconciled_at:
+        type: timestamp
+      notes:
+        type: text
