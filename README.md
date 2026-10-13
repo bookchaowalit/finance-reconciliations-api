@@ -1,5 +1,4 @@
-# reconciliations
-
+# finance-reconciliations-api
 The Reconciliations cell: its own API (Railway, serverless) and its own Neon
 database, first generated from `cell.yaml` (one of the ten finance
 services split on 2026-10-12). It
@@ -8,8 +7,8 @@ HTTP with the caller's token.
 
 | | |
 |---|---|
-| API | Railway project `reconciliations`, service `reconciliations-api` (Serverless) |
-| Data | Neon project `reconciliations`, database `reconciliations` |
+| API | Railway project `finance-reconciliations-api`, service `reconciliations-api` (Serverless) |
+| Data | Neon project `finance-reconciliations-api`, database `reconciliations` |
 | Registry | solo-empire `repository-catalog/registries/online-systems.yaml` (`reconciliations`) |
 
 ## API
