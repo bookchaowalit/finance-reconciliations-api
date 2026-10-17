@@ -158,7 +158,9 @@ def coerce(f: Field | None, raw: str, name: str) -> Any:
         if f.type == "date":
             return date.fromisoformat(raw)
         if f.type == "timestamp":
-            return datetime.fromisoformat(raw)
+            # Keep the original Z handling: fromisoformat() alone accepts a different set of
+            # malformed values (e.g. "2026-10-17Z12:34:56"), so dropping replace() changes validation.
+            return datetime.fromisoformat(raw.replace("Z", "+00:00"))  # noqa: FURB162 - behaviour-neutral rollout
         if f.type == "enum" and raw not in f.values:
             raise ValueError(raw)
         return raw
