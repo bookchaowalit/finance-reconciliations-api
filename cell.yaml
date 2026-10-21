@@ -9,6 +9,8 @@ resources:
     - account_id
     - status
     - source_type
+    ranges:
+    - [period_start, period_end]
     fields:
       account_id:
         type: bigint
