@@ -49,7 +49,7 @@ def test_amounts_must_be_numbers(client, owner):
 def test_a_difference_may_be_negative(client, owner):
     short = create(client, owner, difference_amount=-125.5)
     assert short.status_code == 201, short.text
-    assert short.json()["difference_amount"] == -125.5
+    assert short.json()["difference_amount"] == "-125.5000"
 
 
 def test_dates_must_be_real_dates(client, owner):

@@ -104,7 +104,7 @@ def test_matching_a_reconciliation_bumps_its_version(client, owner):
     )
     assert matched.status_code == 200, matched.text
     assert matched.json()["status"] == "matched"
-    assert matched.json()["difference_amount"] == 0
+    assert matched.json()["difference_amount"] == "0.0000"
     assert matched.json()["reconciled_at"] is not None
     assert matched.json()["version"] == 2
 

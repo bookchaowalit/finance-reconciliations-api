@@ -34,9 +34,9 @@ def test_amounts_keep_their_decimal_value(client, owner):
         reconciled_amount=10200.25,
         difference_amount=50.5,
     ).json()
-    assert reconciliation["expected_amount"] == 10250.75
-    assert reconciliation["reconciled_amount"] == 10200.25
-    assert reconciliation["difference_amount"] == 50.5
+    assert reconciliation["expected_amount"] == "10250.7500"
+    assert reconciliation["reconciled_amount"] == "10200.2500"
+    assert reconciliation["difference_amount"] == "50.5000"
 
 
 def test_an_account_can_be_reconciled_for_the_same_period_twice(client, owner):

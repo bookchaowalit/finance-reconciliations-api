@@ -1,6 +1,6 @@
 # Reconciliations cell: one of the ten finance services split from the retired finance_* tables (2026-10-12).
 # Checks of an account (account_id) against a statement or export for a period.
-# Amounts are real (float) like every kit cell; cross-cell ids (account_id, ...) are plain bigints, not foreign keys.
+# Amounts are exact (money = numeric(19,4), decimal = numeric(30,10); SPEC-003); cross-cell ids (account_id, ...) are plain bigints, not foreign keys.
 cell: reconciliations
 title: Reconciliations
 resources:
@@ -32,15 +32,14 @@ resources:
       source_ref:
         type: text
       expected_amount:
-        type: real
+        type: money
       reconciled_amount:
-        type: real
+        type: money
       difference_amount:
-        type: real
+        type: money
       currency:
-        type: text
+        type: currency
         default: THB
-        max_length: 12
       status:
         type: enum
         values:

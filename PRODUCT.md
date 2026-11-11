@@ -43,12 +43,16 @@ workspace-scoped, so the same service can serve other tenants without code chang
 
 ## Capabilities and Constraints
 
+- SPEC-003: amounts are exact `money` (`numeric(19,4)`) and quantities, unit prices and rates are
+  `decimal` (`numeric(30,10)`); both are JSON strings in responses (`"1234.5600"`). Currency fields
+  are ISO 4217 codes (three upper-case letters). `scope` is a free label the workspace defines (at
+  most 64 characters, default empty).
 - `/v1/reconciliations`: list (filters `account_id`, `status`, `source_type`; ordered by id,
   `order=desc` reverses), stats (`group_by` one of those filters), get, get-by-legacy-id, create
   (with `Idempotency-Key`), patch (with `expected_version`), delete.
 - Rules: `period_start`, `period_end` and `source_type` are required; `source_type` is
   bank_statement, wallet_export, invoice_register, manual or other; `status` is open, matched,
-  exception or closed (default open); `currency` defaults to THB (at most 12 characters);
+  exception or closed (default open); `currency` defaults to THB (ISO 4217);
   `reconciled_at` is a timestamp; unknown fields are refused.
 - `period_end` cannot be before `period_start` (422 `invalid_value` naming both fields, on create
   and on patch); the same day for both is allowed.
