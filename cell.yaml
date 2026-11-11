@@ -5,6 +5,8 @@ cell: reconciliations
 title: Reconciliations
 resources:
   reconciliation:
+    # SPEC-005: reference data only in events (no amounts, names or notes).
+    graph: [account_id, period_start, period_end, source_type, currency, status]
     filters:
     - account_id
     - status
