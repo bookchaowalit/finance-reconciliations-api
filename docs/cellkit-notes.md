@@ -28,6 +28,7 @@ Commits touching `src/cellkit/` or `cell.yaml`:
 | `ranges` rule | yes: `reconciliation` period_start..period_end | d1566ef · `.venv/bin/pytest -q tests/test_reconciliation_validation.py::test_a_period_cannot_end_before_it_starts` · `assert 201 == 422` |
 | Column limits / finite reals | yes: `reconciliation.difference_amount`, `reconciliation.expected_amount`, `reconciliation.reconciled_amount` | 0b50912 · `.venv/bin/pytest -q -k numbers_fit` · `AssertionError: ('expected_amount', 'NaN', '{"id":1000000,"legacy_id":null,"account_id":null,"period_start":"2026-10-10","period_end":"2026-10-10","source_type"` |
 | Security review P3s (2026-11-11): import with `legacy_id` needs `<cell>.<resource>:admin` (it picks the id and may backdate timestamps; the owner grants it only for an import), a PDP 403 is a 403 not a 503, no `/docs`/`/redoc` pages (`/openapi.json` stays public) | yes: shared cellkit, same in all ten finance cells | `.venv/bin/pytest -q -k 'needs_admin or docs_pages or platform_refusal'` · red without the fix: 4 failed |
+| SPEC-009 (2026-11-11): a PATCH that sends a `money` field without `expected_version` gets 428 `version_required` (fields, current version); other PATCHes unchanged | yes: shared cellkit, same in all ten finance cells | `.venv/bin/pytest -q -k money_patch` · red before the change: `assert 200 == 428` |
 
 ## Deliberately not applied
 

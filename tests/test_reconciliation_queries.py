@@ -100,6 +100,7 @@ def test_matching_a_reconciliation_bumps_its_version(client, owner):
             "reconciled_amount": 500,
             "difference_amount": 0,
             "reconciled_at": "2026-10-01T09:30:00+00:00",
+            "expected_version": 1,
         },
     )
     assert matched.status_code == 200, matched.text
@@ -113,7 +114,9 @@ def test_a_patch_that_changes_nothing_keeps_the_version(client, owner):
     reconciliation = create(client, owner, expected_amount=500, status="open").json()
     path = f"{RECONCILIATIONS}/{reconciliation['id']}"
     same = client.patch(
-        path, headers=owner, json={"status": "open", "expected_amount": 500}
+        path,
+        headers=owner,
+        json={"status": "open", "expected_amount": 500, "expected_version": 1},
     )
     assert same.status_code == 200, same.text
     assert same.json()["version"] == 1
