@@ -50,6 +50,11 @@ jobs:
           RECONCILIATIONS_KAFKA_CA_PEM: ${{ secrets.RECONCILIATIONS_KAFKA_CA_PEM }}
           RECONCILIATIONS_KAFKA_USERNAME: ${{ secrets.RECONCILIATIONS_KAFKA_USERNAME }}
           RECONCILIATIONS_KAFKA_PASSWORD: ${{ secrets.RECONCILIATIONS_KAFKA_PASSWORD }}
+          # SPEC-002 signed events: the signing seed is a secret; the pinned public keys and the
+          # mode (off/report/enforce) are repository variables. Unset = unsigned, unchecked.
+          RECONCILIATIONS_EVENT_SIGNING_KEY: ${{ secrets.RECONCILIATIONS_EVENT_SIGNING_KEY }}
+          RECONCILIATIONS_EVENT_KEYS: ${{ vars.RECONCILIATIONS_EVENT_KEYS }}
+          RECONCILIATIONS_EVENT_SIGNATURES: ${{ vars.RECONCILIATIONS_EVENT_SIGNATURES }}
         run: |
           set +e
           .venv/bin/reconciliations-relay > "$RUNNER_TEMP/relay.json" 2> "$RUNNER_TEMP/relay.err"
